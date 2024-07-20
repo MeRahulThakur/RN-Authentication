@@ -10,7 +10,7 @@ import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import { Colors } from './constants/colors';
-import AuthContextProvider, { AuthContext } from './store/auth-context';
+import AuthContextProvider, { AuthContext } from './store/context/auth-context';
 import IconButton from './components/UI/IconButton';
 import ThemeProvider, { useTheme } from './hooks/useTheme';
 
