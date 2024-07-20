@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useColorScheme, Appearance } from './hooks/useColorScheme';
+//import { useColorScheme } from './hooks/useColorScheme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -12,15 +12,19 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import { Colors } from './constants/colors';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
 import IconButton from './components/UI/IconButton';
+import ThemeProvider, { useTheme } from './hooks/useTheme';
 
 const Stack = createNativeStackNavigator();
 
 function AuthStack() {
-  const colorScheme = useColorScheme();
-  
+  //const colorScheme = useColorScheme();
+  const {colorScheme} = useTheme();
+  console.log('AuthStack theme', colorScheme)
+
   return (
     <Stack.Navigator
       screenOptions={{
+        headerShown: false,
         headerStyle: { backgroundColor: Colors[colorScheme ?? 'light'].primary500 },
         headerTintColor: 'white',
         contentStyle: { backgroundColor: Colors[colorScheme ?? 'light'].primary100 },
@@ -34,7 +38,8 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   const authCtx = useContext(AuthContext);
-  const colorScheme = useColorScheme();
+  //const colorScheme = useColorScheme();
+  const {colorScheme} = useTheme();
 
   return (
     <Stack.Navigator
@@ -91,15 +96,15 @@ function Root() {
     fetchToken();
   }, [])
 
-  useEffect(()=>{
-    if(!isTryingLogin){
+  useEffect(() => {
+    if (!isTryingLogin) {
       //Hide the splash screen
       SplashScreen.hideAsync();
     }
-  },[isTryingLogin])
+  }, [isTryingLogin])
 
-  if(isTryingLogin){
-   return null;
+  if (isTryingLogin) {
+    return null;
   }
 
   return <Navigation />
@@ -109,7 +114,9 @@ export default function App() {
   return (
     <>
       <AuthContextProvider>
-        <Root />
+        <ThemeProvider>
+          <Root />
+        </ThemeProvider>
       </AuthContextProvider>
       <StatusBar style="auto" />
     </>

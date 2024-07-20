@@ -5,6 +5,7 @@ export const Colors = {
     primary800: '#610440',
     error100: '#fcdcbf',
     error500: '#f37c13',
+    textColor: '#000',
   },
   dark: {
     primary100: '#a0defb',
@@ -12,5 +13,6 @@ export const Colors = {
     primary800: '#003b88',
     error100: '#fcdcbf',
     error500: '#f37c13',
+    textColor: '#000',
   },
 };
