@@ -28,7 +28,7 @@ export default Button;
 const getStyles = (colorScheme: ColorSchemeName) => {
   return StyleSheet.create({
     button: {
-      borderRadius: 6,
+      borderRadius: 50,
       paddingVertical: 6,
       paddingHorizontal: 12,
       backgroundColor: Colors[colorScheme?? 'light'].primary500,

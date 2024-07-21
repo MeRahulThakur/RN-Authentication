@@ -6,8 +6,8 @@ import { useTheme } from '../../hooks/useTheme';
 interface InputProps {
   label: string,
   type: string,
-  keyboardType: KeyboardTypeOptions,
-  secure: boolean,
+  keyboardType?: KeyboardTypeOptions,
+  secure?: boolean,
   onUpdateValue: (value: string, type: string) => void,
   value: string,
   isInvalid: boolean,
@@ -26,13 +26,13 @@ function Input({
   const styles = getStyles(colorScheme)
 
   const handleTextChange = (text: string) => {
-    onUpdateValue(text, type);
+    onUpdateValue(type,text);
   };
 
   return (
     <View style={styles.inputContainer}>
       {/* <Text style={[styles.label, isInvalid && styles.labelInvalid]}>
-        {label}
+        {label}rr
       </Text> */}
       <TextInput
         style={[styles.input, isInvalid && styles.inputInvalid]}
@@ -41,7 +41,7 @@ function Input({
         keyboardType={keyboardType}
         secureTextEntry={secure}
         onChangeText={handleTextChange}
-        value={value}
+        //value={value}
         placeholder={label}
         placeholderTextColor={Colors[colorScheme?? 'light'].textColor}
       />
@@ -67,7 +67,9 @@ const getStyles = (colorScheme: ColorSchemeName) => {
       paddingVertical: 8,
       paddingHorizontal: 6,
       backgroundColor: Colors[colorScheme?? 'light'].primary100,
-      borderRadius: 4,
+      borderColor: Colors[colorScheme?? 'light'].grey,
+      borderRadius: 50,
+      borderWidth: 3,
       fontSize: 16,
     },
     inputInvalid: {

@@ -6,6 +6,7 @@ export const Colors = {
     error100: '#fcdcbf',
     error500: '#f37c13',
     textColor: '#000',
+    grey: '#808080',
   },
   dark: {
     primary100: '#a0defb',
@@ -14,5 +15,6 @@ export const Colors = {
     error100: '#fcdcbf',
     error500: '#f37c13',
     textColor: '#000',
+    grey: '#808080',
   },
 };

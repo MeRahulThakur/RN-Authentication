@@ -31,13 +31,14 @@ const getStyles = (colorScheme: ColorSchemeName) => {
   button: {
     paddingVertical: 6,
     paddingHorizontal: 12,
+    borderRadius: 50,
   },
   pressed: {
     opacity: 0.7,
   },
   buttonText: {
     textAlign: 'center',
-    color: Colors[colorScheme?? 'light'].primary100,
+    color: Colors[colorScheme?? 'light'].textColor,
   },
 });
 }
