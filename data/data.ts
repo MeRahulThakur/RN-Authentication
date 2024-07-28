@@ -39,6 +39,17 @@ export const cases = [
     age: 29,
     gender: 'Male',
     hospital: 'Charnock Hospital',
+  },
+  {
+    caseID: 9030,
+    name: 'Deepak Sridhar',
+    surgery: 'Elbow Surgery',
+    duration: 10,
+    profileImage: 'https://img.freepik.com/free-photo/young-adult-enjoying-virtual-date_23-2149328221.jpg',
+    status: 'inactive',
+    age: 32,
+    gender: 'Male',
+    hospital: 'Charnock Hospital',
   }
 ];
 
@@ -66,5 +77,9 @@ export const patientReadingsData = [
   { time: '08:00', temperature: 98, skin: 5, redness: 2 },
   { time: '12:00', temperature: 100, skin: 6, redness: 3 },
   { time: '16:00', temperature: 99, skin: 4, redness: 1 },
-  { time: '20:00', temperature: 101, skin: 7, redness: 4 },
+  { time: '17:00', temperature: 101, skin: 7, redness: 4 },
+  { time: '17:30', temperature: 78, skin: 7, redness: 4 },
+  { time: '19:00', temperature: 89, skin: 7, redness: 4 },
+  { time: '20:00', temperature: 95, skin: 7, redness: 4 },
+  { time: '20:30', temperature: 99, skin: 7, redness: 4 },
 ];
