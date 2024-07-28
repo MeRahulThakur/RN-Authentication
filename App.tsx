@@ -13,6 +13,8 @@ import { Colors } from './constants/colors';
 import AuthContextProvider, { AuthContext } from './store/context/auth-context';
 import IconButton from './components/UI/IconButton';
 import ThemeProvider, { useTheme } from './hooks/useTheme';
+import ActivateCase from './screens/ActivateCase';
+import PatientDashboard from './screens/PatientDashboard';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +64,14 @@ function AuthenticatedStack() {
             />
           ),
         }}
+      />
+      <Stack.Screen
+        name="ActivateCase"
+        component={ActivateCase}
+      />
+      <Stack.Screen
+        name="PatientDashboard"
+        component={PatientDashboard}
       />
     </Stack.Navigator>
   );
