@@ -1,16 +1,18 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import CollapsibleCard from '../components/UI/CollapsibleCard'
 import { cases } from '../data/data';
 import { getFormattedDate } from '../util/helper';
-import HealthRing from '../components/UI/HealthRing';
+//import HealthRing from '../components/UI/HealthRing';
 import { Colors } from '../constants/colors';
 //import BarGroupChart from '../components/UI/BarGroup';
 import { LineChart } from '../components/UI/LineChart';
 import IconButton from '../components/UI/IconButton';
 import FloatingButton from '../components/UI/FloatingButton';
+import Ring from '../components/UI/Ring';
 
 export default function PatientDashboard({ route }) {
+  const [activeRing, setActiveRing] = useState<string>('')
   const { caseID } = route.params
   const collapsibleCardProps = cases.find(eachCase => eachCase.caseID === caseID)
 
@@ -22,15 +24,22 @@ export default function PatientDashboard({ route }) {
     console.log('requestReadingHandler')
   }
 
+  const ringPressHandler = (ringTitle: string) => {
+    setActiveRing(ringTitle)
+  }
+
   return (
     <ScrollView>
       <View style={styles.rootContainer}>
         {collapsibleCardProps && <CollapsibleCard {...collapsibleCardProps} />}
         <Text style={styles.todaysDate}>{getFormattedDate(new Date())}</Text>
         <View style={styles.rings}>
-          <HealthRing value={75} maxValue={100} radius={40} strokeWidth={8} title='Temperature' />
+          {/* <HealthRing value={75} maxValue={100} radius={40} strokeWidth={8} title='Temperature' />
           <HealthRing value={25} maxValue={100} radius={40} strokeWidth={8} title='Skin' />
-          <HealthRing value={15} maxValue={100} radius={40} strokeWidth={8} title='Redness' />
+          <HealthRing value={15} maxValue={100} radius={40} strokeWidth={8} title='Redness' /> */}
+          <Ring value={75} title='Temperature' active={activeRing} onPress={ringPressHandler} />
+          <Ring value={25.5} title='Skin' active={activeRing} onPress={ringPressHandler} />
+          <Ring value={15.35} title='Redness' active={activeRing} onPress={ringPressHandler} />
         </View>
         <View style={styles.infoBox}>
           <View>
@@ -84,7 +93,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: '100%',
     paddingVertical: 15,
-    marginVertical: 10,
+    marginVertical: 7,
     backgroundColor: '#f9f9f9',
   },
   infoBoxRightItem: {
