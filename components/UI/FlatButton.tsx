@@ -5,16 +5,17 @@ import { Colors } from '../../constants/colors';
 import { useTheme } from '../../hooks/useTheme';
 
 interface FlatButtonProps {
-  onPress: () => void
+  onPress: () => void;
+  mode?: 'primary';
 }
 
-function FlatButton({ children, onPress }: PropsWithChildren<FlatButtonProps>) {
+function FlatButton({ children, mode, onPress }: PropsWithChildren<FlatButtonProps>) {
   const {colorScheme} = useTheme()
   const styles = getStyles(colorScheme)
   
   return (
     <Pressable
-      style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+      style={({ pressed }) => [styles.button, mode && styles[mode], pressed && styles.pressed]}
       onPress={onPress}
     >
       <View>
@@ -32,6 +33,11 @@ const getStyles = (colorScheme: ColorSchemeName) => {
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 50,
+  },
+  primary: {
+    backgroundColor: Colors[colorScheme?? 'light'].primary500,
+    borderRadius: 5,
+    width: '40%',
   },
   pressed: {
     opacity: 0.7,
