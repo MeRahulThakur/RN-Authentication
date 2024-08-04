@@ -1,13 +1,13 @@
 import { useContext, useState, useEffect } from 'react';
 
-import { FlatList, Image, Text } from 'react-native';
+import { FlatList, Image, Pressable, Text } from 'react-native';
 import { AuthContext } from '../store/context/auth-context';
 import ProfileCard from '../components/UI/ProfileCard';
 import { cases, userProfile } from '../data/data';
 import FloatingButton from '../components/UI/FloatingButton';
 import GlassModal from '../components/UI/GlassModal';
 
-function WelcomeScreen() {
+function WelcomeScreen({ navigation }) {
   const [welcomeModal, setWlecomeModal] = useState<boolean>(false);
   const [updateProfileModal, setUpdateProfileModal] = useState<boolean>(false);
 
@@ -15,7 +15,7 @@ function WelcomeScreen() {
   const token = authCtx.token;
 
   // useEffect(() => {}, [token]);
-  /* <Dropdown dataSet={countries} keyData='country' placeHolder='Select Country' /> */
+  /*  */
 
   useEffect(() => {
     userProfile.firstLogin ? setWlecomeModal(true) : ''
@@ -25,9 +25,14 @@ function WelcomeScreen() {
     console.log('addCaseHandler')
   }
 
-  const closeWelcomeHandler = () => {console.log('closeWelcomeHandler')
+  const closeWelcomeHandler = () => {
     setWlecomeModal(false)
     !userProfile.profileUpdated && setUpdateProfileModal(true)
+  }
+
+  const updateProfile = () => {
+    setUpdateProfileModal(false)
+    navigation.navigate('Profile')
   }
 
   function renderCaseItem(itemData) {
@@ -53,19 +58,28 @@ function WelcomeScreen() {
       {welcomeModal && <GlassModal visible={true} closeButton={false} onClose={closeWelcomeHandler} onSubmit={() => console.log('pressed ok')} modalActions={false}>
         <Image
           source={{ uri: 'https://cdn-icons-png.flaticon.com/128/9144/9144898.png' }}
-          style={{width: 100,
+          style={{
+            width: 100,
             height: 100,
-            borderRadius: 0,}}
+            borderRadius: 0,
+          }}
         />
       </GlassModal>}
       {updateProfileModal && <GlassModal visible={true} closeButton={true} onClose={() => setUpdateProfileModal(false)} onSubmit={() => console.log('pressed ok')} modalActions={false} backdropDismiss={false}>
-        <Image
-          source={{ uri: 'https://cdn-icons-png.flaticon.com/128/15320/15320550.png' }}
-          style={{width: 100,
-            height: 100,
-            borderRadius: 0,}}
-        />
-        <Text style={{fontSize: 15, fontWeight: 'bold'}}>Update Profile</Text>
+        <Pressable
+          style={({ pressed }) => pressed && { opacity: 0.5 }}
+          onPress={updateProfile}
+        >
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/128/15320/15320550.png' }}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 0,
+            }}
+          />
+          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Update Profile</Text>
+        </Pressable>
       </GlassModal>}
       <FlatList
         data={cases}

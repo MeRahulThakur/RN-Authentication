@@ -84,8 +84,31 @@ export const patientReadingsData = [
   { time: '20:30', temperature: 99, skin: 7, redness: 4 },
 ];
 
+export const profession = [
+  {id: 1, professionName: 'Doctor'},
+  {id: 2, professionName: 'HCP'},
+  {id: 3, professionName: 'Surgeon'},
+  {id: 4, professionName: 'Nurse'},
+  {id: 5, professionName: 'Staff'},
+  {id: 6, professionName: 'Attendant'},
+]
+
+export const hospital = [
+  {id: 1, hospitalName: 'Hospital A'},
+  {id: 2, hospitalName: 'Hospital B'},
+  {id: 3, hospitalName: 'Hospital C'},
+  {id: 4, hospitalName: 'Hospital D'},
+  {id: 5, hospitalName: 'Hospital E'},
+  {id: 6, hospitalName: 'Hospital F'},
+]
+
 export const userProfile = {
   userName: 'Rahul Thakur',
+  email: 'iamrahulthakur.1992@gmail.com',
+  profession: '',
+  hospital: '',
+  dob: '',
+  createdAt: '',
   profileUpdated: false,
   firstLogin: true,
 }
