@@ -6,6 +6,7 @@ import { Colors } from '../../constants/colors';
 
 interface GlassModalProps {
   visible: boolean;
+  backdropDismiss?: boolean; 
   onClose: () => void;
   onSubmit: () => void;
   closeButton: boolean;
@@ -14,10 +15,10 @@ interface GlassModalProps {
   modalActions: boolean;
 }
 
-const GlassModal: React.FC<GlassModalProps> = ({ visible, closeButton, onClose, onSubmit, title, children, modalActions }) => {
+const GlassModal: React.FC<GlassModalProps> = ({ visible, closeButton, onClose, onSubmit, title, children, modalActions, backdropDismiss = true }) => {
   return (
     <Modal transparent={true} animationType="fade" visible={visible}>
-      <TouchableWithoutFeedback onPress={onClose}>
+      <TouchableWithoutFeedback onPress={() => backdropDismiss && onClose()}>
         <View style={styles.backdrop}>
           <View style={styles.modalContainer}>
             <View style={[styles.modalHeader, !title && styles.modalHeaderWithoutTitle]}>
