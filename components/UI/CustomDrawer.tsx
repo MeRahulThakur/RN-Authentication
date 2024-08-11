@@ -66,7 +66,7 @@ const CustomDrawer = (props) => {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {authCtx.logout}} style={{paddingVertical: 15}}>
+        <TouchableOpacity onPress={authCtx.logout} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="exit-outline" size={22} />
             <Text
