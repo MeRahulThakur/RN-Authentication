@@ -110,9 +110,9 @@ function AuthenticatedStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: Colors[colorScheme ?? 'light'].primary500 },
+        headerStyle: { backgroundColor: Colors[colorScheme ?? 'light'].primary800 },
         headerTintColor: 'white',
-        contentStyle: { backgroundColor: Colors[colorScheme ?? 'light'].primary100 },
+        contentStyle: { backgroundColor: Colors[colorScheme ?? 'light'].container },
       }}
     >
       <Stack.Screen
