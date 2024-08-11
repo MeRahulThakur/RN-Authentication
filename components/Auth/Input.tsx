@@ -66,7 +66,7 @@ const getStyles = (colorScheme: ColorSchemeName) => {
     input: {
       paddingVertical: 8,
       paddingHorizontal: 15,
-      backgroundColor: Colors[colorScheme?? 'light'].primary100,
+      backgroundColor: Colors[colorScheme?? 'light'].container,
       borderColor: Colors.common.grey,
       borderRadius: 50,
       borderWidth: 1,
