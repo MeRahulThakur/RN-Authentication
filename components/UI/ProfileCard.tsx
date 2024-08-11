@@ -19,26 +19,28 @@ const ProfileCard = ({ caseID, name, surgery, duration, profileImage, status, ag
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
   const onPress = () => {
     const screen = status === 'inactive' ? 'ActivateCase' : 'PatientDashboard'
-    navigation.navigate(screen,{
+    navigation.navigate(screen, {
       caseID
     })
   }
   return (
-    <Pressable
-      android_ripple={{ color: '#ccc' }}
-      style={({ pressed }) => [pressed && styles.pressed]}
-      onPress={onPress}
-    >
-      <View style={[styles.card, status && styles[status]]}>
-        <Image source={{ uri: profileImage }} style={styles.image} />
-        <View style={styles.details}>
+
+    <View style={[styles.card, status && styles[status]]}>
+      <Image source={{ uri: profileImage }} style={styles.image} />
+      <View style={styles.details}>
+        <Pressable
+          android_ripple={{ color: '#ccc' }}
+          style={({ pressed }) => [pressed && styles.pressed]}
+          onPress={onPress}
+        >
+
           <Text style={styles.caseID}>Case ID: {caseID}</Text>
           <Text style={styles.text}>Name:{name}</Text>
           <Text style={styles.text}>Surgery: {surgery}</Text>
           <Text style={styles.text}>Duration: {duration}</Text>
-        </View>
+        </Pressable>
       </View>
-    </Pressable>
+    </View>
   );
 };
 
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
     marginVertical: 10,
-    marginHorizontal: 12,
+    marginHorizontal: 15,
     borderWidth: 1,
     borderRadius: 8,
     backgroundColor: '#fff',
