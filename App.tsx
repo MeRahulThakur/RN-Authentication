@@ -116,7 +116,7 @@ function AuthenticatedStack() {
       }}
     >
       <Stack.Screen
-        name="Drawer"
+        name="Home"
         component={DrawerNavigator}
         options={{
           headerShown: false,
