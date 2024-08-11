@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 //import { useColorScheme } from './hooks/useColorScheme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SplashScreen from 'expo-splash-screen';
@@ -16,12 +17,15 @@ import ThemeProvider, { useTheme } from './hooks/useTheme';
 import ActivateCase from './screens/ActivateCase';
 import PatientDashboard from './screens/PatientDashboard';
 import Profile from './screens/Profile';
+import { Ionicons } from '@expo/vector-icons';
+import CustomDrawer from './components/UI/CustomDrawer';
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function AuthStack() {
   //const colorScheme = useColorScheme();
-  const {colorScheme} = useTheme();
+  const { colorScheme } = useTheme();
   console.log('AuthStack theme', colorScheme)
 
   return (
@@ -39,10 +43,56 @@ function AuthStack() {
   );
 }
 
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawer {...props} />}
+      screenOptions={{
+        headerStyle: { backgroundColor: '#e02a0e' },
+        headerTintColor: 'white',
+        sceneContainerStyle: { backgroundColor: '#d6cec9' },
+        drawerContentStyle: { backgroundColor: '#939393cc' },
+        //drawerInactiveTintColor: 'white',
+        drawerActiveTintColor: '#351401',
+        drawerActiveBackgroundColor: '#e4baa1',
+      }}
+    >
+      <Drawer.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{
+          title: "Home",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
+          ),
+          headerRight: ({ tintColor }) => (
+            <IconButton
+              icon="notifications"
+              color={tintColor}
+              size={24}
+              onPress={()=> console.log('Pressed')}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: 'Profile',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+}
+
 function AuthenticatedStack() {
   const authCtx = useContext(AuthContext);
   //const colorScheme = useColorScheme();
-  const {colorScheme} = useTheme();
+  const { colorScheme } = useTheme();
 
   return (
     <Stack.Navigator
@@ -53,17 +103,10 @@ function AuthenticatedStack() {
       }}
     >
       <Stack.Screen
-        name="Welcome"
-        component={WelcomeScreen}
+        name="Drawer"
+        component={DrawerNavigator}
         options={{
-          headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="exit"
-              color={tintColor}
-              size={24}
-              onPress={authCtx.logout}
-            />
-          ),
+          headerShown: false,
         }}
       />
       <Stack.Screen
