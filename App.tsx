@@ -19,6 +19,7 @@ import PatientDashboard from './screens/PatientDashboard';
 import Profile from './screens/Profile';
 import { Ionicons } from '@expo/vector-icons';
 import CustomDrawer from './components/UI/CustomDrawer';
+import { View, Text } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -43,18 +44,29 @@ function AuthStack() {
   );
 }
 
+function HeaderHome(props) {
+  const {tintColor = 'white'} = props
+  return (
+    <View style={{ flex: 1, }}>
+      <Text style={{color: tintColor, fontSize:16}}>Welcome</Text>
+      <Text style={{color: tintColor, fontSize:16}}>Rahul</Text>
+    </View>
+  )
+}
+
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
-        headerStyle: { backgroundColor: '#e02a0e' },
+        headerStyle: { backgroundColor: '#bf111b' },
         headerTintColor: 'white',
+        headerTitleStyle: { fontWeight: 'bold' },
         sceneContainerStyle: { backgroundColor: '#d6cec9' },
         drawerContentStyle: { backgroundColor: '#939393cc' },
         //drawerInactiveTintColor: 'white',
         drawerActiveTintColor: '#351401',
-        drawerActiveBackgroundColor: '#e4baa1',
+        drawerActiveBackgroundColor: '#bf111a70',
       }}
     >
       <Drawer.Screen
@@ -65,14 +77,16 @@ function DrawerNavigator() {
           drawerIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
+          headerTitleAlign: 'left',
           headerRight: ({ tintColor }) => (
             <IconButton
               icon="notifications"
               color={tintColor}
               size={24}
-              onPress={()=> console.log('Pressed')}
+              onPress={() => console.log('Pressed')}
             />
           ),
+          headerTitle: (props) => <HeaderHome {...props} />
         }}
       />
       <Drawer.Screen
@@ -90,7 +104,6 @@ function DrawerNavigator() {
 }
 
 function AuthenticatedStack() {
-  const authCtx = useContext(AuthContext);
   //const colorScheme = useColorScheme();
   const { colorScheme } = useTheme();
 
