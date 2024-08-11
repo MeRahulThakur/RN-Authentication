@@ -23,12 +23,23 @@ const DatePicker = ({ placeHolder, type, mode, onSelect }: DatePickerProps) => {
   };
 
   const getformattedDateOnMode = (date: Date) => {
+    console.log('date-', date)
     if (mode === 'date')
       return date.toLocaleDateString()
     else if (mode === 'time')
-      return date.toTimeString()
+      return date.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+      })
     else
-      return date.toISOString()
+      return `${date.toLocaleDateString()} ${date.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+      })}`
   }
 
   const handleConfirm = (date: Date) => {
