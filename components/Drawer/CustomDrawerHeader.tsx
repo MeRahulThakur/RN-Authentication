@@ -1,9 +1,17 @@
-import React from 'react';
-import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, StyleSheet, Platform, StatusBar, TouchableOpacity } from 'react-native';
 import IconButton from '../UI/IconButton';
 import { DrawerHeaderProps } from '@react-navigation/drawer';
+import ScrollablePopupMenu from '../UI/ScrollablePopupMenu';
 
 const CustomDrawerHeader: React.FC<DrawerHeaderProps> = ({ navigation, options }) => {
+  const [visible, setVisible] = useState(false);
+  const menuItems = Array.from({ length: 20 }, (_, index) => `Item ${index + 1}`);
+
+  const toggleMenu = () => {
+    setVisible(!visible);
+  };
+
   return (
     <SafeAreaView style={styles.headerContainer}>
       <View style={styles.headerMenu}>
@@ -21,8 +29,15 @@ const CustomDrawerHeader: React.FC<DrawerHeaderProps> = ({ navigation, options }
             icon="ellipsis-vertical"
             color={options.headerTintColor}
             size={23}
-            onPress={() => console.log('Pressed')}
+            onPress={toggleMenu}
           />
+          {visible && <ScrollablePopupMenu visible={visible} toggleMenu={toggleMenu}>
+            {menuItems.map((item, index) => (
+              <TouchableOpacity key={index} style={styles.menuItem}>
+                <Text style={styles.menuItemText}>{item}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollablePopupMenu>}
         </View>
         <View style={styles.headerTitleContainer}>
           <Text style={styles.headerTitle}>Hi Dr. Abc</Text>
@@ -43,8 +58,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
     backgroundColor: '#bf111b',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
   },
   headerMenu: {
     alignSelf: 'flex-start',
@@ -61,6 +76,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  menuItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#fff',
+  },
+  menuItemText: {
+    fontSize: 16,
+    color: '#fff',
   },
 });
 
