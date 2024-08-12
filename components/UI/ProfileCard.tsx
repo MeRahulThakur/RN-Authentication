@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    height: 100,
+    height: 120,
     marginRight: 10,
   },
   details: {
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     width: '100%',
   },
   caseID: {

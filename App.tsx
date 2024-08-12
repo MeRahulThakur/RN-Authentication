@@ -18,8 +18,10 @@ import ActivateCase from './screens/ActivateCase';
 import PatientDashboard from './screens/PatientDashboard';
 import Profile from './screens/Profile';
 import { Ionicons } from '@expo/vector-icons';
-import CustomDrawer from './components/UI/CustomDrawer';
+import CustomDrawer from './components/Drawer/CustomDrawer';
 import { View, Text } from 'react-native';
+import CustomDrawerHeader from './components/Drawer/CustomDrawerHeader';
+import Notifications from './screens/Notifications';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -44,15 +46,15 @@ function AuthStack() {
   );
 }
 
-function HeaderHome(props) {
-  const {tintColor = 'white'} = props
-  return (
-    <View style={{ flex: 1, }}>
-      <Text style={{color: tintColor, fontSize:16}}>Welcome</Text>
-      <Text style={{color: tintColor, fontSize:16}}>Rahul</Text>
-    </View>
-  )
-}
+// function HeaderHome(props) {
+//   const {tintColor = 'white'} = props
+//   return (
+//     <View style={{ flex: 1, }}>
+//       <Text style={{color: tintColor, fontSize:16}}>Welcome</Text>
+//       <Text style={{color: tintColor, fontSize:16}}>Rahul</Text>
+//     </View>
+//   )
+// }
 
 function DrawerNavigator() {
   return (
@@ -77,16 +79,17 @@ function DrawerNavigator() {
           drawerIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
-          headerTitleAlign: 'left',
-          headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="notifications"
-              color={tintColor}
-              size={24}
-              onPress={() => console.log('Pressed')}
-            />
-          ),
-          headerTitle: (props) => <HeaderHome {...props} />
+          // headerTitleAlign: 'left',
+          // headerRight: ({ tintColor }) => (
+          //   <IconButton
+          //     icon="notifications"
+          //     color={tintColor}
+          //     size={24}
+          //     onPress={() => console.log('Pressed')}
+          //   />
+          // ),
+          // headerTitle: (props) => <HeaderHome {...props} />
+          header: (props) => <CustomDrawerHeader {...props} />
         }}
       />
       <Drawer.Screen
@@ -133,6 +136,10 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="Profile"
         component={Profile}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
       />
     </Stack.Navigator>
   );
