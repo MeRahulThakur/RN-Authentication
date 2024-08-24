@@ -78,7 +78,7 @@ export default function Profile() {
           placeHolder='Select Hospital'
           onSelect={updateInputValueHandler}
         />
-        <DatePicker mode='date' type='date' placeHolder='Select date' onSelect={updateInputValueHandler} />
+        <DatePicker display="inline" mode='date' type='date' placeHolder='Select date' onSelect={updateInputValueHandler} />
         <DatePicker mode='time' type='date' placeHolder='Select time' onSelect={updateInputValueHandler} />
         <DatePicker mode='datetime' type='date' placeHolder='Select datetime' onSelect={updateInputValueHandler} />
       </View>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
     alignItems: 'center',
-    //justifyContent: 'center',
+    //justifyContent: 'space-evenly',
     padding: 10,
   },
   profileImageContainer: {
@@ -119,5 +119,6 @@ const styles = StyleSheet.create({
   },
   updateButton: {
     alignSelf: 'stretch',
+    justifyContent: 'flex-end',
   },
 })

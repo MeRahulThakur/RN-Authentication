@@ -7,10 +7,11 @@ interface DatePickerProps {
   mode: "date" | "time" | "datetime";
   type: string;
   placeHolder: string;
+  display?: 'inline' | 'spinner';
   onSelect: (value: string, type: string) => void;
 }
 
-const DatePicker = ({ placeHolder, type, mode, onSelect }: DatePickerProps) => {
+const DatePicker = ({ placeHolder, type, mode, display = 'spinner', onSelect }: DatePickerProps) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<Date | string>('');
 
@@ -79,6 +80,7 @@ const DatePicker = ({ placeHolder, type, mode, onSelect }: DatePickerProps) => {
         mode={mode}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        display={display}
       />
     </View>
   );
